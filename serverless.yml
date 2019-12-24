@@ -11,5 +11,30 @@ plugins:
 provider:
   name: aws
   runtime: nodejs10.x
-  stage: dev
+  stage: prod
   region: eu-central-1
+
+  environment:
+    tableName: todos
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:eu-central-1:*:*"
+
+functions:
+  createTodo:
+    handler: createTodo.main
+    events:
+      - http:
+        path: todos
+        method: post
+        cors: true
+        authorizer: aws_iam
