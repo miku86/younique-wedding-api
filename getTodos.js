@@ -1,7 +1,7 @@
 import * as databaseLib from "./libs/database";
 import { failure, success } from "./libs/response";
 
-export const main = () => {
+export const main = async (event) => {
   const params = {
     TableName: process.env.tableName,
     KeyConditionExpression: "userId = :userId",
@@ -16,4 +16,4 @@ export const main = () => {
   } catch (error) {
     return failure({ status: false });
   }
-}
+};
