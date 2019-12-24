@@ -47,3 +47,12 @@ functions:
         method: get
         cors: true
         authorizer: aws_iam
+
+  deleteTodo:
+    handler: deleteTodo.main
+    events:
+      - http:
+        path: todos/{id}
+        method: delete
+        cors: true
+        authorizer: aws_iam
