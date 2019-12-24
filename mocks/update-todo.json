@@ -1,0 +1,11 @@
+{
+  "pathParameters": {
+    "id": "526eeae5-1aec-4538-b018-04932315e60b"
+  },
+  "body": "{\"content\": \"updated content\"}",
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "TEST-USER-1"
+    }
+  }
+}
