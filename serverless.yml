@@ -30,17 +30,8 @@ provider:
       Resource: "arn:aws:dynamodb:eu-central-1:*:*"
 
 functions:
-  createTodo:
-    handler: createTodo.main
-    events:
-      - http:
-          path: todos
-          method: post
-          cors: true
-          authorizer: aws_iam
-
   getTodos:
-    handler: getTodos.main
+    handler: functions/getTodos.main
     events:
       - http:
           path: todos
@@ -48,8 +39,17 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  createTodo:
+    handler: functions/createTodo.main
+    events:
+      - http:
+          path: todos
+          method: post
+          cors: true
+          authorizer: aws_iam
+
   deleteTodo:
-    handler: deleteTodo.main
+    handler: functions/deleteTodo.main
     events:
       - http:
           path: todos/{id}
@@ -58,7 +58,7 @@ functions:
           authorizer: aws_iam
 
   updateTodo:
-    handler: updateTodo.main
+    handler: functions/updateTodo.main
     events:
       - http:
           path: todos/{id}
