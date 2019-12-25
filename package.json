@@ -9,10 +9,13 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/uuid": "^3.4.6",
     "aws-sdk": "2.596.0",
     "serverless-bundle": "1.2.5",
     "serverless-dotenv-plugin": "2.1.1",
-    "serverless-offline": "5.12.1"
+    "serverless-offline": "5.12.1",
+    "serverless-plugin-typescript": "^1.1.9",
+    "typescript": "^3.7.4"
   },
   "dependencies": {
     "uuid": "^3.3.3"
