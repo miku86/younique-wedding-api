@@ -1,6 +1,6 @@
 import uuid from "uuid";
-import * as databaseLib from "./libs/database";
-import { failure, success } from "./libs/response";
+import * as databaseLib from "../libs/database";
+import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
   const data = JSON.parse(event.body);
