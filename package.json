@@ -4,7 +4,7 @@
   "description": "Node.js, Serverless Framework and Testing",
   "main": "",
   "scripts": {
-    "test": "serverless-bundle test"
+    "test": "serverless-bundle test --passWithNoTests"
   },
   "author": "",
   "license": "MIT",
