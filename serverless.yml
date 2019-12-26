@@ -1,4 +1,4 @@
-service: younique-wedding-api
+service: younique-wedding-api-iaas
 
 package:
   individually: true
@@ -8,14 +8,18 @@ plugins:
   - serverless-offline
   - serverless-dotenv-plugin
 
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  tableName: ${self:custom.stage}-todos
+
 provider:
   name: aws
   runtime: nodejs10.x
-  stage: prod
+  stage: dev
   region: eu-central-1
 
   environment:
-    tableName: todos
+    tableName: ${self:custom.tableName}
 
   iamRoleStatements:
     - Effect: Allow
@@ -27,7 +31,8 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:eu-central-1:*:*"
+      Resource:
+        - "Fn::GetAtt": [ TodosTable, Arn ]
 
 functions:
   getTodos:
@@ -68,3 +73,6 @@ functions:
 
 resources:
   - ${file(resources/api-gateway-errors.yml)}
+  - ${file(resources/database-table.yml)}
+  - ${file(resources/cognito-user-pool.yml)}
+  - ${file(resources/cognito-identity-pool.yml)}
