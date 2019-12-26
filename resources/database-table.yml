@@ -11,6 +11,6 @@ Resources:
       KeySchema:
         - AttributeName: userId
           KeyType: HASH
-        - AttributeName: noteId
+        - AttributeName: todoId
           KeyType: RANGE
       BillingMode: PAY_PER_REQUEST

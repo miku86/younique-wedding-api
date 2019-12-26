@@ -75,3 +75,4 @@ resources:
   - ${file(resources/api-gateway-errors.yml)}
   - ${file(resources/database-table.yml)}
   - ${file(resources/cognito-user-pool.yml)}
+  - ${file(resources/cognito-identity-pool.yml)}
