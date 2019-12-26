@@ -74,3 +74,4 @@ functions:
 resources:
   - ${file(resources/api-gateway-errors.yml)}
   - ${file(resources/database-table.yml)}
+  - ${file(resources/cognito-user-pool.yml)}
