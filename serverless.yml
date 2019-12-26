@@ -1,4 +1,4 @@
-service: younique-wedding-api
+service: younique-wedding-api-iaas
 
 package:
   individually: true
@@ -11,7 +11,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs10.x
-  stage: prod
+  stage: dev
   region: eu-central-1
 
   environment:
