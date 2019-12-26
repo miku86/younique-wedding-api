@@ -1,0 +1,16 @@
+Resources:
+  TodosTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.tableName}
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: todoId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: noteId
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
