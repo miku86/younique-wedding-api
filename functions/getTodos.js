@@ -17,8 +17,13 @@ export const main = async (event) => {
 
   try {
     const result = await databaseLib.call("query", params);
-    console.log(result);
-    return success(result.Items);
+    console.log(userId);
+    return success({
+      userId,
+      pk,
+      sk
+    }
+    );
   } catch (error) {
     return failure({ status: false });
   }
