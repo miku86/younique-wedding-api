@@ -8,7 +8,7 @@ export const main = async (event) => {
     KeyConditionExpression: "PK = :pk AND SK :sk",
     ExpressionAttributeValues: {
       ":pk": { "S": `USER#${userId}` },
-      ":metadata": { "S": `#METADATA#${userId}` },
+      ":sk": { "S": `#METADATA#${userId}` },
     }
   };
 
