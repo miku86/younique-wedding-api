@@ -2,7 +2,7 @@ import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
-  const userId = event.requestContext.identity.cognitoIdentityId;
+  const userId = event.requestContext;
   const pk = `USER#${userId}`;
   const sk = `TODO#USER#${userId}`;
 
@@ -20,8 +20,6 @@ export const main = async (event) => {
     console.log(userId);
     return success({
       userId,
-      pk,
-      sk
     }
     );
   } catch (error) {
