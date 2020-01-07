@@ -16,7 +16,7 @@ export const main = async (event) => {
   };
 
   try {
-    const result = await databaseLib.call("query", params);
+    await databaseLib.call("query", params);
     console.log(userId);
     return success({
       userId,
