@@ -10,7 +10,7 @@ export const main = async (event) => {
     TableName: process.env.tableName,
     KeyConditionExpression: "PK = :pk",
     ExpressionAttributeValues: {
-      ":pk": { "S": `USER#${userId}` },
+      ":pk": `USER#${userId}`
     }
   };
 
