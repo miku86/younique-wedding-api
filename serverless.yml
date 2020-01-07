@@ -10,7 +10,7 @@ plugins:
 
 custom:
   stage: ${opt:stage, self:provider.stage}
-  tableName: ${self:custom.stage}-todos
+  tableName: ${self:custom.stage}-younique-wedding
 
 provider:
   name: aws
