@@ -8,10 +8,9 @@ export const main = async (event) => {
 
   const params = {
     TableName: process.env.tableName,
-    KeyConditionExpression: "PK = :pk AND BEGINS_WITH (SK, :sk)",
+    KeyConditionExpression: "PK = :pk",
     ExpressionAttributeValues: {
       ":pk": { "S": `USER#${userId}` },
-      ":sk": { "S": `TODO#USER#${userId}` },
     }
   };
 
