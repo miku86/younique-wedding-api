@@ -32,7 +32,7 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource:
-        - "Fn::GetAtt": [ TodosTable, Arn ]
+        - "Fn::GetAtt": [ YouniqueWeddingTable, Arn ]
 
 functions:
   getTodos:
