@@ -2,6 +2,7 @@ import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
+  console.log(event);
   const userId = event.requestContext.identity.cognitoIdentityId;
   console.log(userId);
 
