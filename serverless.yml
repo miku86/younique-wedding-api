@@ -1,4 +1,4 @@
-service: younique-wedding-api-iaas
+service: younique-wedding-api
 
 package:
   individually: true
