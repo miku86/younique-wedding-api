@@ -1,5 +1,5 @@
 Resources:
-  TodosTable:
+  YouniqueWeddingTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: ${self:custom.tableName}
