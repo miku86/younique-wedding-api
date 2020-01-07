@@ -5,10 +5,10 @@ export const main = async (event) => {
   const userId = event.requestContext.identity.cognitoIdentityId;
   const params = {
     TableName: process.env.tableName,
-    KeyConditionExpression: "PK = :pk AND SK :sk",
+    KeyConditionExpression: "PK = :pk AND BEGINS_WITH (SK, :sk)",
     ExpressionAttributeValues: {
       ":pk": { "S": `USER#${userId}` },
-      ":sk": { "S": `#METADATA#${userId}` },
+      ":sk": { "S": `TODO#USER#${userId}` },
     }
   };
 
