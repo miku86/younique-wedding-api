@@ -2,7 +2,7 @@ import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
-  const userId = event.requestContext;
+  const userId = databaseLib.findUserId(event);
   const pk = `USER#${userId}`;
   const sk = `TODO#USER#${userId}`;
 
