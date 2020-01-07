@@ -14,6 +14,7 @@ export const main = async (event) => {
 
   try {
     const result = await databaseLib.call("query", params);
+    console.log(result)
     return success(result.Items);
   } catch (error) {
     return failure({ status: false });
