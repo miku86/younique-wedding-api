@@ -1,5 +1,5 @@
 import * as databaseLib from "../libs/database";
-import { failure, success } from "../libs/response";
+import { success } from "../libs/response";
 
 export const main = async (event) => {
   console.log(event);
@@ -20,6 +20,7 @@ export const main = async (event) => {
     console.log(result);
     return success(result.Items);
   } catch (error) {
-    return failure({ status: false });
+    // return failure({ status: false });
+    return error;
   }
 };
