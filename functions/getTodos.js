@@ -2,11 +2,14 @@ import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
+  const userId = databaseLib.findUserId(event);
+
   const params = {
     TableName: process.env.tableName,
-    KeyConditionExpression: "userId = :userId",
+    KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
     ExpressionAttributeValues: {
-      ":userId": event.requestContext.identity.cognitoIdentityId
+      ":pk": `USER#${userId}`,
+      ":sk": `TODO#USER#${userId}`
     }
   };
 
