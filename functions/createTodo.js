@@ -4,13 +4,17 @@ import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
   const data = JSON.parse(event.body);
+  const userId = databaseLib.findUserId(event);
+  const todoId = uuid.v4();
+
   const params = {
     TableName: process.env.tableName,
     Item: {
-      userId: event.requestContext.identity.cognitoIdentityId,
-      todoId: uuid.v4(),
-      content: data.content,
-      createdAt: Date.now()
+      PK: `USER#${userId}`,
+      SK: `TODO#USER#${userId}#${todoId}`,
+      userId,
+      timestamp: Date.now(),
+      ...data
     }
   };
 
@@ -20,4 +24,4 @@ export const main = async (event) => {
   } catch (error) {
     return failure({ status: false });
   };
-};
+};;
