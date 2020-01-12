@@ -24,4 +24,4 @@ export const main = async (event) => {
   } catch (error) {
     return failure({ status: false });
   };
-};;
+};
