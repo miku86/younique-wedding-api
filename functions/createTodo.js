@@ -12,6 +12,7 @@ export const main = async (event) => {
     Item: {
       PK: `USER#${userId}`,
       SK: `TODO#USER#${userId}#${todoId}`,
+      todoId,
       userId,
       timestamp: Date.now(),
       ...data
