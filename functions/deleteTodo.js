@@ -2,11 +2,15 @@ import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
+  const userId = databaseLib.findUserId(event);
+
+  console.log(event.requestContext);
+
   const params = {
     TableName: process.env.tableName,
     Key: {
-      userId: event.requestContext.identity.cognitoIdentityId,
-      todoId: event.pathParameters.id
+      PK: `abc`,
+      SK: `123`
     }
   };
 
