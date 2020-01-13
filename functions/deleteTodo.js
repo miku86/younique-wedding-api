@@ -3,15 +3,14 @@ import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
   const userId = databaseLib.findUserId(event);
-  console.log(userId);
 
-  console.log(event.requestContext);
+  console.log(event);
 
   const params = {
     TableName: process.env.tableName,
     Key: {
-      PK: `abc`,
-      SK: `123`
+      PK: `USER#${userId}`,
+      SK: `TODO#USER#${userId}#${todoId}`,
     }
   };
 
