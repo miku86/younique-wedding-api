@@ -3,6 +3,7 @@ import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
   const userId = databaseLib.findUserId(event);
+  console.log(userId);
 
   console.log(event.requestContext);
 
