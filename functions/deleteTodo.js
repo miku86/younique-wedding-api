@@ -2,10 +2,8 @@ import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
-  const data = JSON.parse(event.body);
+  const { todoId } = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
-  const todoId = "123";
-  console.log(data);
 
   const params = {
     TableName: process.env.tableName,
