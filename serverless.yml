@@ -32,7 +32,7 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource:
-        - "Fn::GetAtt": [ YouniqueWeddingTable, Arn ]
+        - "Fn::GetAtt": [YouniqueWeddingTable, Arn]
 
 functions:
   getTodos:
@@ -67,6 +67,42 @@ functions:
     events:
       - http:
           path: todos
+          method: put
+          cors: true
+          authorizer: aws_iam
+
+  getGuests:
+    handler: functions/getGuests.main
+    events:
+      - http:
+          path: guests
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  createGuest:
+    handler: functions/createGuest.main
+    events:
+      - http:
+          path: guests
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  deleteGuest:
+    handler: functions/deleteGuest.main
+    events:
+      - http:
+          path: guests
+          method: delete
+          cors: true
+          authorizer: aws_iam
+
+  updateGuest:
+    handler: functions/updateGuest.main
+    events:
+      - http:
+          path: guests
           method: put
           cors: true
           authorizer: aws_iam
