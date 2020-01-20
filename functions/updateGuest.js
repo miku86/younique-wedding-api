@@ -2,17 +2,18 @@ import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
-  const data = JSON.parse(event.body);
+  const { guestId, fieldKey, newFieldValue } = JSON.parse(event.body);
+  const userId = databaseLib.findUserId(event);
 
   const params = {
     TableName: process.env.tableName,
     Key: {
-      userId: event.requestContext.identity.cognitoIdentityId,
-      todoId: event.pathParameters.id
+      PK: `USER#${userId}`,
+      SK: `GUEST#USER#${userId}#${guestId}`,
     },
-    UpdateExpression: "SET content = :content",
+    UpdateExpression: `SET ${fieldKey} = :newFieldValue`,
     ExpressionAttributeValues: {
-      ":content": data.content || null
+      ":newFieldValue": newFieldValue || null
     },
     ReturnValues: "ALL_NEW"
   };
