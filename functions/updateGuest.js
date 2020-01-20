@@ -13,7 +13,7 @@ export const main = async (event) => {
     },
     UpdateExpression: `SET ${fieldKey} = :newFieldValue`,
     ExpressionAttributeValues: {
-      ":newFieldValue": newFieldValue || null
+      ":newFieldValue": newFieldValue
     },
     ReturnValues: "ALL_NEW"
   };
