@@ -15,6 +15,10 @@ export const main = async (event) => {
       guestId,
       userId,
       timestamp: Date.now(),
+      sentSaveTheDate: false,
+      sentInvite: false,
+      receivedResponse: false,
+      coming: false,
       ...data
     }
   };
