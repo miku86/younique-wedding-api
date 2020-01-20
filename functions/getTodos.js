@@ -9,7 +9,7 @@ export const main = async (event) => {
     KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
     ExpressionAttributeValues: {
       ":pk": `USER#${userId}`,
-      ":sk": `TODO#USER#${userId}`
+      ":sk": `TODO#${userId}`
     }
   };
 

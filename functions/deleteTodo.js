@@ -9,7 +9,7 @@ export const main = async (event) => {
     TableName: process.env.tableName,
     Key: {
       PK: `USER#${userId}`,
-      SK: `TODO#USER#${userId}#${todoId}`,
+      SK: `TODO#${userId}#${todoId}`,
     }
   };
 

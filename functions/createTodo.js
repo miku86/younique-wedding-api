@@ -11,7 +11,7 @@ export const main = async (event) => {
     TableName: process.env.tableName,
     Item: {
       PK: `USER#${userId}`,
-      SK: `TODO#USER#${userId}#${todoId}`,
+      SK: `TODO#${userId}#${todoId}`,
       todoId,
       userId,
       timestamp: Date.now(),

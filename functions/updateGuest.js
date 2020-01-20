@@ -9,7 +9,7 @@ export const main = async (event) => {
     TableName: process.env.tableName,
     Key: {
       PK: `USER#${userId}`,
-      SK: `GUEST#USER#${userId}#${guestId}`,
+      SK: `GUEST#${userId}#${guestId}`,
     },
     UpdateExpression: `SET ${fieldKey} = :newFieldValue`,
     ExpressionAttributeValues: {
