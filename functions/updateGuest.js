@@ -5,10 +5,6 @@ export const main = async (event) => {
   const { guestId, fieldKey, newFieldValue } = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
 
-  const data = JSON.parse(event.body);
-  console.log(data);
-
-
   const params = {
     TableName: process.env.tableName,
     Key: {
@@ -17,7 +13,7 @@ export const main = async (event) => {
     },
     UpdateExpression: `SET ${fieldKey} = :newFieldValue`,
     ExpressionAttributeValues: {
-      ":newFieldValue": newFieldValue || null
+      ":newFieldValue": newFieldValue
     },
     ReturnValues: "ALL_NEW"
   };
