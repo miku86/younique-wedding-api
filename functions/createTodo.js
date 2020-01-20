@@ -15,6 +15,7 @@ export const main = async (event) => {
       todoId,
       userId,
       timestamp: Date.now(),
+      done: false,
       ...data
     }
   };
