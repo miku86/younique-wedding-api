@@ -120,7 +120,7 @@ functions:
     handler: functions/getBudgetItems.main
     events:
       - http:
-          path: budgetitems
+          path: budget
           method: get
           cors: true
           authorizer: aws_iam
@@ -129,7 +129,7 @@ functions:
     handler: functions/createBudgetItem.main
     events:
       - http:
-          path: budgetitems
+          path: budget
           method: post
           cors: true
           authorizer: aws_iam
@@ -138,7 +138,7 @@ functions:
     handler: functions/deleteBudgetItem.main
     events:
       - http:
-          path: budgetitems
+          path: budget
           method: delete
           cors: true
           authorizer: aws_iam
@@ -147,7 +147,7 @@ functions:
     handler: functions/updateBudgetItem.main
     events:
       - http:
-          path: budgetitems
+          path: budget
           method: put
           cors: true
           authorizer: aws_iam
