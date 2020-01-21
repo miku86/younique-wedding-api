@@ -35,6 +35,15 @@ provider:
         - "Fn::GetAtt": [YouniqueWeddingTable, Arn]
 
 functions:
+  getDashboard:
+    handler: functions/getDashboard.main
+    events:
+      - http:
+          path: dashboard
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   getTodos:
     handler: functions/getTodos.main
     events:
@@ -106,14 +115,40 @@ functions:
           method: put
           cors: true
           authorizer: aws_iam
-  
 
-  getDashboard:
-    handler: functions/getDashboard.main
+  getBudgetItems:
+    handler: functions/getBudgetItems.main
     events:
       - http:
-          path: dashboard
+          path: budgetitems
           method: get
+          cors: true
+          authorizer: aws_iam
+
+  createBudgetItem:
+    handler: functions/createBudgetItem.main
+    events:
+      - http:
+          path: budgetitems
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  deleteBudgetItem:
+    handler: functions/deleteBudgetItem.main
+    events:
+      - http:
+          path: budgetitems
+          method: delete
+          cors: true
+          authorizer: aws_iam
+
+  updateBudgetItem:
+    handler: functions/updateBudgetItem.main
+    events:
+      - http:
+          path: budgetitems
+          method: put
           cors: true
           authorizer: aws_iam
 
