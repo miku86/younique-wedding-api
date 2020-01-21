@@ -1,5 +1,5 @@
 import * as databaseLib from "../libs/database";
-import { failure } from "../libs/response";
+import { failure, success } from "../libs/response";
 
 const fetchTodoData = async (userId) => {
   const params = {
@@ -13,7 +13,6 @@ const fetchTodoData = async (userId) => {
 
   try {
     const { Items } = await databaseLib.call("query", params);
-    console.log("todos", Items);
     const amountItems = Items.length;
     const amountDoneItems = Items.filter(item => item.done).length;
     return { amountItems, amountDoneItems };
@@ -34,7 +33,6 @@ const fetchGuestData = async (userId) => {
 
   try {
     const { Items } = await databaseLib.call("query", params);
-    console.log("guests", Items);
     const amountItems = Items.length;
     const amountDoneItems = Items.filter(item => item.coming).length;
     return { amountItems, amountDoneItems };
@@ -49,8 +47,6 @@ export const main = async (event) => {
   let dashboardData = {};
   dashboardData.todos = await fetchTodoData(userId);
   dashboardData.guests = await fetchGuestData(userId);
-
-  console.log("main", dashboardData);
-
-  return dashboardData;
+  
+  return success(dashboardData);
 };
