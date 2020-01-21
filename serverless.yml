@@ -106,6 +106,16 @@ functions:
           method: put
           cors: true
           authorizer: aws_iam
+  
+
+  getDashboard:
+    handler: functions/getDashboard.main
+    events:
+      - http:
+          path: dashboard
+          method: get
+          cors: true
+          authorizer: aws_iam
 
 resources:
   - ${file(resources/api-gateway-errors.yml)}
