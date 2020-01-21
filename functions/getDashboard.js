@@ -13,6 +13,7 @@ const fetchTodoData = async (userId) => {
 
   try {
     const { Items } = await databaseLib.call("query", params);
+    console.log("todos", Items);
     const amountItems = Items.length;
     const amountDoneItems = Items.filter(item => item.done).length;
     return { amountItems, amountDoneItems };
@@ -33,6 +34,7 @@ const fetchGuestData = async (userId) => {
 
   try {
     const { Items } = await databaseLib.call("query", params);
+    console.log("guests", Items);
     const amountItems = Items.length;
     const amountDoneItems = Items.filter(item => item.coming).length;
     return { amountItems, amountDoneItems };
@@ -48,7 +50,7 @@ export const main = async (event) => {
   dashboardData.todos = await fetchTodoData(userId);
   dashboardData.guests = await fetchGuestData(userId);
 
-  console.log(dashboardData);
+  console.log("main", dashboardData);
 
   return dashboardData;
 };
