@@ -45,8 +45,8 @@ export const main = async (event) => {
   const userId = databaseLib.findUserId(event);
 
   let dashboardData = {};
-  dashboardData.todos = fetchTodoData(userId);
-  dashboardData.guests = fetchGuestData(userId);
+  dashboardData.todos = await fetchTodoData(userId);
+  dashboardData.guests = await fetchGuestData(userId);
 
   console.log(dashboardData);
 
