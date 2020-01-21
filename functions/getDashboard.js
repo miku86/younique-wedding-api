@@ -43,10 +43,8 @@ const fetchGuestData = async (userId) => {
 
 export const main = async (event) => {
   const userId = databaseLib.findUserId(event);
-
   let dashboardData = {};
   dashboardData.todos = await fetchTodoData(userId);
   dashboardData.guests = await fetchGuestData(userId);
-  
   return success(dashboardData);
 };
