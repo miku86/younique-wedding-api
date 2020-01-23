@@ -1,14 +1,10 @@
 import AWS from "aws-sdk";
-import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 const SES = new AWS.SES();
 
 export const main = async (event) => {
   const data = JSON.parse(event.body);
-  const userId = databaseLib.findUserId(event);
-  console.log(data);
-  console.log(userId);
 
   const params = {
     Destination: {
@@ -17,7 +13,7 @@ export const main = async (event) => {
     Message: {
       Body: {
         Text: {
-          Data: userId,
+          Data: data,
         },
       },
       Subject: {
@@ -30,6 +26,7 @@ export const main = async (event) => {
 
   try {
     const response = await SES.sendEmail(params).promise();
+    console.log(response);
     return success(response);
   } catch (error) {
     return failure({ status: false });
