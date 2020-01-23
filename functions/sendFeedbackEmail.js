@@ -13,7 +13,7 @@ export const main = async (event) => {
     Message: {
       Body: {
         Text: {
-          Data: `Ein User nutze möchte: ${feedback}`,
+          Data: `Ein User möchte: ${feedback}`,
         },
       },
       Subject: {
