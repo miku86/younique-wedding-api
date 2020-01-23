@@ -20,7 +20,7 @@ export const main = async (event) => {
   };
   console.log(sesParams);
 
-  const response = await AWS.SES.sendEmail(sesParams).promise();
+  const response = await new AWS.SES.sendEmail(sesParams).promise();
 
   console.log(response);
 };
