@@ -15,7 +15,7 @@ export const main = async (event) => {
     Message: {
       Body: {
         Text: {
-          Data: data,
+          Data: data.value,
         },
       },
       Subject: {
