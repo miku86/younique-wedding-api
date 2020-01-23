@@ -1,5 +1,7 @@
 import AWS from "aws-sdk";
 
+const SES = new AWS.SES();
+
 export const main = async (event) => {
   const sesParams = {
     Destination: {
@@ -20,7 +22,6 @@ export const main = async (event) => {
   };
   console.log(sesParams);
 
-  const response = await new AWS.SES.sendEmail(sesParams).promise();
-
+  const response = await SES.sendEmail(sesParams).promise();
   console.log(response);
 };
