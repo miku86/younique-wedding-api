@@ -31,6 +31,8 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - ses:SendEmail
+        - ses:SendRawEmail
       Resource:
         - "Fn::GetAtt": [YouniqueWeddingTable, Arn]
 
@@ -149,6 +151,15 @@ functions:
       - http:
           path: budget
           method: put
+          cors: true
+          authorizer: aws_iam
+
+  sendFeedbackEmail:
+    handler: functions/sendFeedbackEmail.main
+    events:
+      - http:
+          path: sendFeedbackEmail
+          method: post
           cors: true
           authorizer: aws_iam
 
