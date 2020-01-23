@@ -4,9 +4,7 @@ import { failure, success } from "../libs/response";
 const SES = new AWS.SES();
 
 export const main = async (event) => {
-  console.log("EVENT.BODY", event.body);
-  const data = JSON.parse(event.body);
-  console.log("PARSED", data);
+  const { feedback } = JSON.parse(event.body);
 
   const params = {
     Destination: {
@@ -15,12 +13,12 @@ export const main = async (event) => {
     Message: {
       Body: {
         Text: {
-          Data: data.value,
+          Data: `Ein User nutze möchte: ${feedback}`,
         },
       },
       Subject: {
         Charset: 'UTF-8',
-        Data: 'Feedback',
+        Data: 'Feedback: neues Feature',
       },
     },
     Source: "miku86coding@gmail.com",
@@ -28,7 +26,6 @@ export const main = async (event) => {
 
   try {
     const response = await SES.sendEmail(params).promise();
-    console.log(response);
     return success(response);
   } catch (error) {
     return failure({ status: false });
