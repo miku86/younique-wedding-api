@@ -4,7 +4,9 @@ import { failure, success } from "../libs/response";
 const SES = new AWS.SES();
 
 export const main = async (event) => {
+  console.log("EVENT.BODY", event.body);
   const data = JSON.parse(event.body);
+  console.log("PARSED", data);
 
   const params = {
     Destination: {
