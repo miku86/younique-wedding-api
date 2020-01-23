@@ -7,7 +7,7 @@ const SES = new AWS.SES();
 export const main = async (event) => {
   const data = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
-  const emailBody = JSON.stringify({ userId, data });
+  const emailBody = { userId, data };
 
   const params = {
     Destination: {
