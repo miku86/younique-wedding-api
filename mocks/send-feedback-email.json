@@ -1,0 +1,8 @@
+{
+  "body": "{\"feedback\": \"calendar\"}",
+  "requestContext": {
+    "identity": {
+      "cognitoAuthenticationProvider": "792bdd6d-c98c-4b81-a9da-64b3a5de8478"
+    }
+  }
+}
