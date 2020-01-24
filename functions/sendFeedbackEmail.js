@@ -1,10 +1,12 @@
 import AWS from "aws-sdk";
+import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 const SES = new AWS.SES();
 
 export const main = async (event) => {
   const { feedback } = JSON.parse(event.body);
+  const userId = databaseLib.findUserId(event);
 
   const params = {
     Destination: {
@@ -13,7 +15,7 @@ export const main = async (event) => {
     Message: {
       Body: {
         Text: {
-          Data: `Ein User möchte: ${feedback}`,
+          Data: `User "${userId}" möchte: "${feedback}"`,
         },
       },
       Subject: {
