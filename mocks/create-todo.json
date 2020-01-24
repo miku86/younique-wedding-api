@@ -1,8 +1,8 @@
 {
-  "body": "{\"content\": \"hello world\"}",
+  "body": "{\"title\": \"createTodo test\"}",
   "requestContext": {
     "identity": {
-      "cognitoIdentityId": "TEST-USER-1"
+      "cognitoAuthenticationProvider": "792bdd6d-c98c-4b81-a9da-64b3a5de8478"
     }
   }
 }
