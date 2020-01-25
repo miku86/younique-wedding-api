@@ -7,6 +7,10 @@ export const main = async (event) => {
 
   console.log(data);
 
+  Object.keys(data).forEach(key => data[key] === undefined && delete data[key]);
+
+  console.log(data);
+
   const params = {
     TableName: process.env.tableName,
     Key: {
