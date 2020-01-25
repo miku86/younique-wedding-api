@@ -1,5 +1,5 @@
 {
-  "body": "{\"todoId\": \"ebe89c1e-0aec-4457-b798-6b4c16f6e7b3\", \"data\": { \"comment\": \"red\" } }",
+  "body": "{\"todoId\": \"ebe89c1e-0aec-4457-b798-6b4c16f6e7b3\", \"data\": { \"comment\": \"red\", \"done\": false } }",
   "requestContext": {
     "identity": {
       "cognitoAuthenticationProvider": "792bdd6d-c98c-4b81-a9da-64b3a5de8478"
