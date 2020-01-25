@@ -12,7 +12,11 @@ const createNames = (data) => {
 const createValues = (data) => {
   const values = {};
   Object.keys(data).forEach(key => {
-    values[`:${key}`] = `${data[key]}`;
+    if (typeof data[key] === "boolean") {
+      values[`:${key}`] = data[key];
+    } else {
+      values[`:${key}`] = `${data[key]}`;
+    }
   });
   return values;
 };
@@ -44,6 +48,8 @@ export const main = async (event) => {
     ExpressionAttributeValues,
     ReturnValues: "ALL_NEW"
   };
+
+  console.log(params);
 
   try {
     await databaseLib.call("update", params);
