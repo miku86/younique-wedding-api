@@ -13,14 +13,16 @@ export const main = async (event) => {
       PK: `USER#${userId}`,
       SK: `TODO#${userId}#${todoId}`,
     },
-    UpdateExpression: `SET #t = :t, #d = :d, #c = :c, #r = :r`,
+    UpdateExpression: `SET #done: :done, #t = :t, #d = :d, #c = :c, #r = :r`,
     ExpressionAttributeNames: {
+      "#done": "done",
       "#t": "title",
       "#d": "deadline",
       "#c": "comment",
       "#r": "responsible"
     },
     ExpressionAttributeValues: {
+      ":done": data.done,
       ":t": data.title,
       ":d": data.deadline,
       ":c": data.comment,
