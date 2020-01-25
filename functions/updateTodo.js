@@ -14,7 +14,7 @@ const createValues = (data) => {
   Object.keys(data).forEach(key => {
     if (typeof data[key] === "boolean") {
       values[`:${key}`] = data[key];
-    } else if (data[key] === "") {
+    } else if (data[key] === "" || data[key] === null) {
       values[`:${key}`] = null;
     } else {
       values[`:${key}`] = `${data[key]}`;
