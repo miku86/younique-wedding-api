@@ -1,6 +1,11 @@
 import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
+const cleanData = (data) => {
+  Object.entries(data).forEach(([key, val]) => (val === null || val === "") && delete data[key]);
+  return data;
+};
+
 const createNames = (data) => {
   const names = {};
   Object.keys(data).forEach(key => {
@@ -33,9 +38,11 @@ export const main = async (event) => {
   const { todoId, data } = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
 
-  const UpdateExpression = createExpression(data);
-  const ExpressionAttributeNames = createNames(data);
-  const ExpressionAttributeValues = createValues(data);
+  const cleanedData = cleanData(data);
+
+  const UpdateExpression = createExpression(cleanedData);
+  const ExpressionAttributeNames = createNames(cleanedData);
+  const ExpressionAttributeValues = createValues(cleanedData);
 
   const params = {
     TableName: process.env.tableName,
