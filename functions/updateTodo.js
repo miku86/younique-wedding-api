@@ -2,7 +2,7 @@ import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
-  const { todoId, fieldKey, newFieldValue } = JSON.parse(event.body);
+  const { todoId, data } = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
 
   const params = {
@@ -11,9 +11,9 @@ export const main = async (event) => {
       PK: `USER#${userId}`,
       SK: `TODO#${userId}#${todoId}`,
     },
-    UpdateExpression: `SET ${fieldKey} = :newFieldValue`,
+    UpdateExpression: "SET comment = :c",
     ExpressionAttributeValues: {
-      ":newFieldValue": newFieldValue
+      ":c": data.comment,
     },
     ReturnValues: "ALL_NEW"
   };
