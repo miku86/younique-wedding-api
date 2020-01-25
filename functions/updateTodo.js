@@ -2,8 +2,11 @@ import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
+  console.log("BODY", event.body);
   const { todoId, data } = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
+
+  console.log("DATA", data);
 
   const params = {
     TableName: process.env.tableName,
@@ -17,6 +20,8 @@ export const main = async (event) => {
     },
     ReturnValues: "ALL_NEW"
   };
+
+  console.log("PARAMS", params);
 
   try {
     await databaseLib.call("update", params);
