@@ -51,8 +51,6 @@ export const main = async (event) => {
     ReturnValues: "ALL_NEW"
   };
 
-  console.log(params);
-
   try {
     await databaseLib.call("update", params);
     return success({ status: true });
