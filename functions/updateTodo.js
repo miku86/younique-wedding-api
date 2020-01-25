@@ -1,15 +1,37 @@
 import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
+const createNames = (data) => {
+  const names = {};
+  Object.keys(data).forEach(key => {
+    names[`#${key}`] = key;
+  });
+  return names;
+};
+
+const createValues = (data) => {
+  const values = {};
+  Object.keys(data).forEach(key => {
+    values[`:${key}`] = `${data[key]}`;
+  });
+  return values;
+};
+
+const createExpression = (data) => {
+  const expression = Object
+    .keys(data)
+    .map(key => `#${[key]} = :${key}`)
+    .join(", ");
+  return `SET ${expression}`;
+};
+
 export const main = async (event) => {
   const { todoId, data } = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
 
-  console.log(data);
-
-  Object.keys(data).forEach(key => data[key] === undefined && delete data[key]);
-
-  console.log(data);
+  const UpdateExpression = createExpression(data);
+  const ExpressionAttributeNames = createNames(data);
+  const ExpressionAttributeValues = createValues(data);
 
   const params = {
     TableName: process.env.tableName,
@@ -17,25 +39,11 @@ export const main = async (event) => {
       PK: `USER#${userId}`,
       SK: `TODO#${userId}#${todoId}`,
     },
-    UpdateExpression: `SET #done: :done, #t = :t, #d = :d, #c = :c, #r = :r`,
-    ExpressionAttributeNames: {
-      "#done": "done",
-      "#t": "title",
-      "#d": "deadline",
-      "#c": "comment",
-      "#r": "responsible"
-    },
-    ExpressionAttributeValues: {
-      ":done": data.done,
-      ":t": data.title,
-      ":d": data.deadline,
-      ":c": data.comment,
-      ":r": data.responsible
-    },
+    UpdateExpression,
+    ExpressionAttributeNames,
+    ExpressionAttributeValues,
     ReturnValues: "ALL_NEW"
   };
-
-  console.log(params);
 
   try {
     await databaseLib.call("update", params);
