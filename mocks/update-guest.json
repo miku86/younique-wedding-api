@@ -1,0 +1,8 @@
+{
+  "body": "{\"guestId\": \"ad3bc0a1-0203-44e5-944c-d8fdb64fc7d5\", \"data\": { \"comment\": \"\", \"coming\": false, \"name\": \"max\" } }",
+  "requestContext": {
+    "identity": {
+      "cognitoAuthenticationProvider": "792bdd6d-c98c-4b81-a9da-64b3a5de8478"
+    }
+  }
+}
