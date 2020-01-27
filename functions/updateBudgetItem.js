@@ -32,7 +32,7 @@ const createExpression = (data) => {
 };
 
 export const main = async (event) => {
-  const { todoId, data } = JSON.parse(event.body);
+  const { budgetItemId, data } = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
 
   const UpdateExpression = createExpression(data);
@@ -43,7 +43,7 @@ export const main = async (event) => {
     TableName: process.env.tableName,
     Key: {
       PK: `USER#${userId}`,
-      SK: `TODO#${userId}#${todoId}`,
+      SK: `BUDGETITEM#${userId}#${budgetItemId}`,
     },
     UpdateExpression,
     ExpressionAttributeNames,

@@ -2,20 +2,20 @@ import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
+  const { budgetItemId } = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
 
   const params = {
     TableName: process.env.tableName,
-    KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
-    ExpressionAttributeValues: {
-      ":pk": `USER#${userId}`,
-      ":sk": `TODO#${userId}`
+    Key: {
+      PK: `USER#${userId}`,
+      SK: `BUDGETITEM#${userId}#${budgetItemId}`,
     }
   };
 
   try {
-    const result = await databaseLib.call("query", params);
-    return success(result.Items);
+    await databaseLib.call("delete", params);
+    return success({ status: true });
   } catch (error) {
     return failure({ status: false });
   }

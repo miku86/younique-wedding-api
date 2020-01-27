@@ -1,10 +1,8 @@
 {
-  "pathParameters": {
-    "id": "0678aed5-5daa-47c3-baf8-94b7f9f740dd"
-  },
+  "body": "{\"todoId\": \"d2729cb8-9a24-4cee-ab90-ff220965d2d3\"}",
   "requestContext": {
     "identity": {
-      "cognitoIdentityId": "TEST-USER-1"
+      "cognitoAuthenticationProvider": "792bdd6d-c98c-4b81-a9da-64b3a5de8478"
     }
   }
 }

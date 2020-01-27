@@ -33,9 +33,25 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource:
-        - "Fn::GetAtt": [ YouniqueWeddingTable, Arn ]
+        - "Fn::GetAtt": [YouniqueWeddingTable, Arn]
+
+    - Effect: Allow
+      Action:
+        - ses:SendEmail
+        - ses:SendRawEmail
+      Resource:
+        - "*"
 
 functions:
+  getDashboard:
+    handler: functions/getDashboard.main
+    events:
+      - http:
+          path: dashboard
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   getTodos:
     handler: functions/getTodos.main
     events:
@@ -58,7 +74,7 @@ functions:
     handler: functions/deleteTodo.main
     events:
       - http:
-          path: todos/{id}
+          path: todos
           method: delete
           cors: true
           authorizer: aws_iam
@@ -67,8 +83,89 @@ functions:
     handler: functions/updateTodo.main
     events:
       - http:
-          path: todos/{id}
+          path: todos
           method: put
+          cors: true
+          authorizer: aws_iam
+
+  getGuests:
+    handler: functions/getGuests.main
+    events:
+      - http:
+          path: guests
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  createGuest:
+    handler: functions/createGuest.main
+    events:
+      - http:
+          path: guests
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  deleteGuest:
+    handler: functions/deleteGuest.main
+    events:
+      - http:
+          path: guests
+          method: delete
+          cors: true
+          authorizer: aws_iam
+
+  updateGuest:
+    handler: functions/updateGuest.main
+    events:
+      - http:
+          path: guests
+          method: put
+          cors: true
+          authorizer: aws_iam
+
+  getBudgetItems:
+    handler: functions/getBudgetItems.main
+    events:
+      - http:
+          path: budget
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  createBudgetItem:
+    handler: functions/createBudgetItem.main
+    events:
+      - http:
+          path: budget
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  deleteBudgetItem:
+    handler: functions/deleteBudgetItem.main
+    events:
+      - http:
+          path: budget
+          method: delete
+          cors: true
+          authorizer: aws_iam
+
+  updateBudgetItem:
+    handler: functions/updateBudgetItem.main
+    events:
+      - http:
+          path: budget
+          method: put
+          cors: true
+          authorizer: aws_iam
+
+  sendFeedbackEmail:
+    handler: functions/sendFeedbackEmail.main
+    events:
+      - http:
+          path: sendFeedbackEmail
+          method: post
           cors: true
           authorizer: aws_iam
 

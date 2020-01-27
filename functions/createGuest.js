@@ -5,17 +5,20 @@ import { failure, success } from "../libs/response";
 export const main = async (event) => {
   const data = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
-  const todoId = uuid.v4();
+  const guestId = uuid.v4();
 
   const params = {
     TableName: process.env.tableName,
     Item: {
       PK: `USER#${userId}`,
-      SK: `TODO#${userId}#${todoId}`,
-      todoId,
+      SK: `GUEST#${userId}#${guestId}`,
+      guestId,
       userId,
       timestamp: Date.now(),
-      done: false,
+      sentSaveTheDate: false,
+      sentInvite: false,
+      receivedResponse: false,
+      coming: false,
       ...data
     }
   };
