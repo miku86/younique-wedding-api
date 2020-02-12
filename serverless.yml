@@ -168,6 +168,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  getSettings:
+    handler: functions/getSettings.main
+    events:
+      - http:
+          path: settings
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   updateSettings:
     handler: functions/updateSettings.main
     events:
