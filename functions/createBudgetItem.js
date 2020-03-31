@@ -25,5 +25,5 @@ export const main = async (event) => {
     return success(params.Item);
   } catch (error) {
     return failure({ status: false });
-  };
+  }
 };
