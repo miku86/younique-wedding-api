@@ -1,11 +1,11 @@
-import uuid from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
   const data = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
-  const todoId = uuid.v4();
+  const todoId = uuidv4();
 
   const params = {
     TableName: process.env.tableName,
