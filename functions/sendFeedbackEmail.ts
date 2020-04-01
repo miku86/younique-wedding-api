@@ -1,6 +1,6 @@
 import * as AWS from "aws-sdk";
-import * as databaseLib from "./libs/database";
-import { failure, success } from "./libs/response";
+import * as databaseLib from "../libs/database";
+import { failure, success } from "../libs/response";
 
 const SES = new AWS.SES();
 

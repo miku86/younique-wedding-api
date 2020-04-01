@@ -1,5 +1,5 @@
-import * as databaseLib from "./libs/database";
-import { failure, success } from "./libs/response";
+import * as databaseLib from "../libs/database";
+import { failure, success } from "../libs/response";
 
 export const main = async (event) => {
   const userId = databaseLib.findUserId(event);
