@@ -63,9 +63,9 @@ const fetchBudgetData = async (userId) => {
 
 export const main = async (event) => {
   const userId = databaseLib.findUserId(event);
-  let dashboardData = {};
-  dashboardData.todos = await fetchTodoData(userId);
-  dashboardData.guests = await fetchGuestData(userId);
-  dashboardData.budget = await fetchBudgetData(userId);
+  const todos = await fetchTodoData(userId);
+  const guests = await fetchGuestData(userId);
+  const budget = await fetchBudgetData(userId);
+  let dashboardData = {todos, guests, budget};
   return success(dashboardData);
 };

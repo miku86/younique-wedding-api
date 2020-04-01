@@ -5,20 +5,17 @@ import { failure, success } from "../libs/response";
 export const main = async (event) => {
   const data = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
-  const guestId = uuidv4();
+  const budgetItemId = uuidv4();
 
   const params = {
     TableName: process.env.tableName,
     Item: {
       PK: `USER#${userId}`,
-      SK: `GUEST#${userId}#${guestId}`,
-      guestId,
+      SK: `BUDGETITEM#${userId}#${budgetItemId}`,
+      budgetItemId,
       userId,
       timestamp: Date.now(),
-      sentSaveTheDate: false,
-      sentInvite: false,
-      receivedResponse: false,
-      coming: false,
+      done: false,
       ...data
     }
   };
@@ -28,5 +25,5 @@ export const main = async (event) => {
     return success(params.Item);
   } catch (error) {
     return failure({ status: false });
-  };
+  }
 };

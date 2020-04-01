@@ -1,4 +1,4 @@
-import AWS from "aws-sdk";
+import * as AWS from "aws-sdk";
 import * as databaseLib from "../libs/database";
 import { failure, success } from "../libs/response";
 

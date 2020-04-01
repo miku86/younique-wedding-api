@@ -4,17 +4,21 @@ package:
   individually: true
 
 plugins:
-  - serverless-bundle
-  - serverless-offline
   - serverless-dotenv-plugin
+  - serverless-webpack
 
 custom:
   stage: ${opt:stage, self:provider.stage}
   tableName: ${self:custom.stage}-younique-wedding
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
 
 provider:
   name: aws
   runtime: nodejs12.x
+  apiGateway:
+    minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
   stage: dev
   region: eu-central-1
 
