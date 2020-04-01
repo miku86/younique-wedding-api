@@ -4,14 +4,15 @@ package:
   individually: true
 
 plugins:
-  - '@kingdarboja/serverless-plugin-typescript'
-  - serverless-bundle
-  - serverless-offline
   - serverless-dotenv-plugin
+  - serverless-webpack
 
 custom:
   stage: ${opt:stage, self:provider.stage}
   tableName: ${self:custom.stage}-younique-wedding
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
 
 provider:
   name: aws
