@@ -1,15 +1,15 @@
-import * as databaseLib from "../libs/database";
-import { failure, success } from "../libs/response";
+import * as databaseLib from "./libs/database";
+import { failure, success } from "./libs/response";
 
 export const main = async (event) => {
-  const { budgetItemId } = JSON.parse(event.body);
+  const { todoId } = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
 
   const params = {
     TableName: process.env.tableName,
     Key: {
       PK: `USER#${userId}`,
-      SK: `BUDGETITEM#${userId}#${budgetItemId}`,
+      SK: `TODO#${userId}#${todoId}`,
     }
   };
 

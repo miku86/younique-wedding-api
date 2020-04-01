@@ -1,8 +1,8 @@
-import * as databaseLib from "../libs/database";
-import { failure, success } from "../libs/response";
+import * as databaseLib from "./libs/database";
+import { failure, success } from "./libs/response";
 
 export const main = async (event) => {
-  const { budgetItemId, data } = JSON.parse(event.body);
+  const { guestId, data } = JSON.parse(event.body);
   const userId = databaseLib.findUserId(event);
 
   const UpdateExpression = databaseLib.createExpression(data);
@@ -13,7 +13,7 @@ export const main = async (event) => {
     TableName: process.env.tableName,
     Key: {
       PK: `USER#${userId}`,
-      SK: `BUDGETITEM#${userId}#${budgetItemId}`,
+      SK: `GUEST#${userId}#${guestId}`,
     },
     UpdateExpression,
     ExpressionAttributeNames,

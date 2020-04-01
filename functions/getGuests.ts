@@ -1,5 +1,5 @@
-import * as databaseLib from "../libs/database";
-import { failure, success } from "../libs/response";
+import * as databaseLib from "./libs/database";
+import { failure, success } from "./libs/response";
 
 export const main = async (event) => {
   const userId = databaseLib.findUserId(event);
@@ -9,7 +9,7 @@ export const main = async (event) => {
     KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
     ExpressionAttributeValues: {
       ":pk": `USER#${userId}`,
-      ":sk": `TODO#${userId}`
+      ":sk": `GUEST#${userId}`
     }
   };
 
