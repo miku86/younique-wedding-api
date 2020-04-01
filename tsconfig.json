@@ -8,11 +8,18 @@
     "allowJs": true,
     "target": "es5",
     "preserveConstEnums": true,
-    // "strict": false,
+    "strict": false,
     "noImplicitAny": false /* Raise error on expressions and declarations with an implied 'any' type. */,
     "strictNullChecks": false /* Enable strict null checks. */,
     "noImplicitThis": false /* Raise error on 'this' expressions with an implied 'any' type. */,
     "alwaysStrict": false /* Parse in strict mode and emit "use strict" for each source file. */
   },
-  "exclude": ["node_modules"]
+  "include": ["./**/*.ts"],
+  "exclude": [
+    "node_modules/**/*",
+    ".serverless/**/*",
+    ".webpack/**/*",
+    "_warmup/**/*",
+    ".vscode/**/*"
+  ]
 }
