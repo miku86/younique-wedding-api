@@ -1,5 +1,4 @@
 import { handler } from '../libs/handler';
-import { failure, success } from "../libs/response";
 import { findUserId, queryItems } from "../libs/database";
 
 export const main = handler(async (event) => {
@@ -14,10 +13,6 @@ export const main = handler(async (event) => {
     }
   };
 
-  try {
-    const result = await queryItems(params);
-    return success(result.Items);
-  } catch (error) {
-    return failure({ status: false });
-  }
-};
+  const result = await queryItems(params);
+  return result.Items;
+});

@@ -1,6 +1,5 @@
 import { handler } from '../libs/handler';
 import { v4 as uuidv4 } from 'uuid';
-import { failure, success } from "../libs/response";
 import { findUserId, putItem } from '../libs/database';
 
 export const main = handler(async (event) => {
@@ -24,10 +23,6 @@ export const main = handler(async (event) => {
     }
   };
 
-  try {
-    await putItem(params);
-    return success(params.Item);
-  } catch (error) {
-    return failure({ status: false });
-  }
-};
+  await putItem(params);
+  return params.Item;
+});

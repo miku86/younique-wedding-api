@@ -1,6 +1,5 @@
 import { handler } from '../libs/handler';
 import * as AWS from "aws-sdk";
-import { failure, success } from "../libs/response";
 import { findUserId } from "../libs/database";
 
 const SES = new AWS.SES();
@@ -27,10 +26,6 @@ export const main = handler(async (event) => {
     Source: "miku86coding@gmail.com",
   };
 
-  try {
-    const response = await SES.sendEmail(params).promise();
-    return success(response);
-  } catch (error) {
-    return failure({ status: false });
-  };
-};
+  const response = await SES.sendEmail(params).promise();
+  return response;
+});

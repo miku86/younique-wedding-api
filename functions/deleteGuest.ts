@@ -1,5 +1,4 @@
 import { handler } from '../libs/handler';
-import { failure, success } from "../libs/response";
 import { findUserId, deleteItem } from "../libs/database";
 
 export const main = handler(async (event) => {
@@ -14,10 +13,6 @@ export const main = handler(async (event) => {
     }
   };
 
-  try {
-    await deleteItem(params);
-    return success({ status: true });
-  } catch (error) {
-    return failure({ status: false });
-  }
-};
+  await deleteItem(params);
+  return { status: true };
+});

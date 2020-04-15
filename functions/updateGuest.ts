@@ -1,5 +1,4 @@
 import { handler } from '../libs/handler';
-import { failure, success } from "../libs/response";
 import { findUserId, createExpression, createNames, createValues, updateItem } from "../libs/database";
 
 export const main = handler(async (event) => {
@@ -22,10 +21,6 @@ export const main = handler(async (event) => {
     ReturnValues: "ALL_NEW"
   };
 
-  try {
-    await updateItem(params);
-    return success({ status: true });
-  } catch (error) {
-    return failure({ status: false });
-  }
-};
+  await updateItem(params);
+  return { status: true };
+});

@@ -1,8 +1,9 @@
 import { handler } from '../libs/handler';
-import { failure, success } from "../libs/response";
 import { queryItems, findUserId } from "../libs/database";
 
-const fetchTodoData = async (userId) => {
+const fetchTodoData = handler(async (event) => {
+  const userId = findUserId(event);
+
   const params = {
     TableName: process.env.tableName,
     KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
@@ -12,17 +13,15 @@ const fetchTodoData = async (userId) => {
     }
   };
 
-  try {
-    const { Items } = await queryItems(params);
-    const amountItems = Items.length;
-    const amountDoneItems = Items.filter(item => item.done).length;
-    return { amountItems, amountDoneItems };
-  } catch (error) {
-    return failure({ status: false });
-  }
-};
+  const { Items } = await queryItems(params);
+  const amountItems = Items.length;
+  const amountDoneItems = Items.filter(item => item.done).length;
+  return { amountItems, amountDoneItems };
+});
 
-const fetchGuestData = async (userId) => {
+const fetchGuestData = handler(async (event) => {
+  const userId = findUserId(event);
+
   const params = {
     TableName: process.env.tableName,
     KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
@@ -32,17 +31,15 @@ const fetchGuestData = async (userId) => {
     }
   };
 
-  try {
-    const { Items } = await queryItems(params);
-    const amountItems = Items.length;
-    const amountDoneItems = Items.filter(item => item.coming).length;
-    return { amountItems, amountDoneItems };
-  } catch (error) {
-    return failure({ status: false });
-  }
-};
+  const { Items } = await queryItems(params);
+  const amountItems = Items.length;
+  const amountDoneItems = Items.filter(item => item.coming).length;
+  return { amountItems, amountDoneItems };
+});
 
-const fetchBudgetData = async (userId) => {
+const fetchBudgetData = handler(async (event) => {
+  const userId = findUserId(event);
+
   const params = {
     TableName: process.env.tableName,
     KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
@@ -52,21 +49,16 @@ const fetchBudgetData = async (userId) => {
     }
   };
 
-  try {
-    const { Items } = await queryItems(params);
-    const amountItems = Items.length;
-    const amountDoneItems = Items.filter(item => item.done).length;
-    return { amountItems, amountDoneItems };
-  } catch (error) {
-    return failure({ status: false });
-  }
-};
+  const { Items } = await queryItems(params);
+  const amountItems = Items.length;
+  const amountDoneItems = Items.filter(item => item.done).length;
+  return { amountItems, amountDoneItems };
+});
 
-export const main = handler(async (event) => {
-  const userId = findUserId(event);
-  const todos = await fetchTodoData(userId);
-  const guests = await fetchGuestData(userId);
-  const budget = await fetchBudgetData(userId);
+export const main = async (event, context) => {
+  const todos = await fetchTodoData(event, context);
+  const guests = await fetchGuestData(event, context);
+  const budget = await fetchBudgetData(event, context);
   let dashboardData = {todos, guests, budget};
-  return success(dashboardData);
+  return dashboardData;
 };
