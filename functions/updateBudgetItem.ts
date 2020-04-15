@@ -1,13 +1,14 @@
-import * as databaseLib from "../libs/database";
+
 import { failure, success } from "../libs/response";
+import { updateItem, findUserId, createExpression, createNames, createValues } from "../libs/database";
 
 export const main = async (event) => {
   const { budgetItemId, data } = JSON.parse(event.body);
-  const userId = databaseLib.findUserId(event);
+  const userId = findUserId(event);
 
-  const UpdateExpression = databaseLib.createExpression(data);
-  const ExpressionAttributeNames = databaseLib.createNames(data);
-  const ExpressionAttributeValues = databaseLib.createValues(data);
+  const UpdateExpression = createExpression(data);
+  const ExpressionAttributeNames = createNames(data);
+  const ExpressionAttributeValues = createValues(data);
 
   const params = {
     TableName: process.env.tableName,
@@ -22,7 +23,7 @@ export const main = async (event) => {
   };
 
   try {
-    await databaseLib.call("update", params);
+    await updateItem(params);
     return success({ status: true });
   } catch (error) {
     return failure({ status: false });

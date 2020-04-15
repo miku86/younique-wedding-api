@@ -1,8 +1,9 @@
-import * as databaseLib from "../libs/database";
+
 import { failure, success } from "../libs/response";
+import { findUserId, queryItems } from "../libs/database";
 
 export const main = async (event) => {
-  const userId = databaseLib.findUserId(event);
+  const userId = findUserId(event);
 
   const params = {
     TableName: process.env.tableName,
@@ -14,7 +15,7 @@ export const main = async (event) => {
   };
 
   try {
-    const result = await databaseLib.call("query", params);
+    const result = await queryItems(params);
     return success(result.Items);
   } catch (error) {
     return failure({ status: false });

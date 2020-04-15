@@ -1,12 +1,13 @@
 import * as AWS from "aws-sdk";
-import * as databaseLib from "../libs/database";
+
 import { failure, success } from "../libs/response";
+import { findUserId } from "../libs/database";
 
 const SES = new AWS.SES();
 
 export const main = async (event) => {
   const { feedback } = JSON.parse(event.body);
-  const userId = databaseLib.findUserId(event);
+  const userId = findUserId(event);
 
   const params = {
     Destination: {

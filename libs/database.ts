@@ -1,9 +1,12 @@
 import * as AWS from "aws-sdk";
 
-export const call = (action, params) => {
-  const database = new AWS.DynamoDB.DocumentClient();
-  return database[action](params).promise();
-};
+const database = new AWS.DynamoDB.DocumentClient();
+
+export const getItem = (params) => database.get(params).promise();
+export const putItem = (params) => database.put(params).promise();
+export const queryItems = (params) => database.query(params).promise();
+export const updateItem = (params) => database.update(params).promise();
+export const deleteItem = (params) => database.delete(params).promise();
 
 export const findUserId = (event) => {
   const authProvider = event.requestContext.identity.cognitoAuthenticationProvider;

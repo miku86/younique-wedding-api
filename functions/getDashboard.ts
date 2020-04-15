@@ -1,5 +1,6 @@
-import * as databaseLib from "../libs/database";
+
 import { failure, success } from "../libs/response";
+import { queryItems, findUserId } from "../libs/database";
 
 const fetchTodoData = async (userId) => {
   const params = {
@@ -12,7 +13,7 @@ const fetchTodoData = async (userId) => {
   };
 
   try {
-    const { Items } = await databaseLib.call("query", params);
+    const { Items } = await queryItems(params);
     const amountItems = Items.length;
     const amountDoneItems = Items.filter(item => item.done).length;
     return { amountItems, amountDoneItems };
@@ -32,7 +33,7 @@ const fetchGuestData = async (userId) => {
   };
 
   try {
-    const { Items } = await databaseLib.call("query", params);
+    const { Items } = await queryItems(params);
     const amountItems = Items.length;
     const amountDoneItems = Items.filter(item => item.coming).length;
     return { amountItems, amountDoneItems };
@@ -52,7 +53,7 @@ const fetchBudgetData = async (userId) => {
   };
 
   try {
-    const { Items } = await databaseLib.call("query", params);
+    const { Items } = await queryItems(params);
     const amountItems = Items.length;
     const amountDoneItems = Items.filter(item => item.done).length;
     return { amountItems, amountDoneItems };
@@ -62,7 +63,7 @@ const fetchBudgetData = async (userId) => {
 };
 
 export const main = async (event) => {
-  const userId = databaseLib.findUserId(event);
+  const userId = findUserId(event);
   const todos = await fetchTodoData(userId);
   const guests = await fetchGuestData(userId);
   const budget = await fetchBudgetData(userId);

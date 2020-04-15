@@ -1,9 +1,10 @@
-import * as databaseLib from "../libs/database";
+
 import { failure, success } from "../libs/response";
+import { deleteItem, findUserId } from "../libs/database";
 
 export const main = async (event) => {
   const { todoId } = JSON.parse(event.body);
-  const userId = databaseLib.findUserId(event);
+  const userId = findUserId(event);
 
   const params = {
     TableName: process.env.tableName,
@@ -14,7 +15,7 @@ export const main = async (event) => {
   };
 
   try {
-    await databaseLib.call("delete", params);
+    await deleteItem(params);
     return success({ status: true });
   } catch (error) {
     return failure({ status: false });
