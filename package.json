@@ -8,7 +8,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@types/aws-lambda": "8.10.49",
+    "@types/aws-lambda": "8.10.50",
     "@types/node": "13.11.1",
     "@types/uuid": "7.0.2",
     "aws-sdk": "2.656.0",
