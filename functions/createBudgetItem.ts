@@ -1,8 +1,9 @@
+import { handler } from '../libs/handler';
 import { v4 as uuidv4 } from 'uuid';
 import { failure, success } from "../libs/response";
 import { findUserId, putItem } from '../libs/database';
 
-export const main = async (event) => {
+export const main = handler(async (event) => {
   const data = JSON.parse(event.body);
   const userId = findUserId(event);
   const budgetItemId = uuidv4();

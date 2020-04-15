@@ -1,8 +1,8 @@
-
+import { handler } from '../libs/handler';
 import { failure, success } from "../libs/response";
 import { updateItem, findUserId, createExpression, createNames, createValues } from "../libs/database";
 
-export const main = async (event) => {
+export const main = handler(async (event) => {
   const { budgetItemId, data } = JSON.parse(event.body);
   const userId = findUserId(event);
 

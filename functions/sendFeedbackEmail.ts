@@ -1,11 +1,11 @@
+import { handler } from '../libs/handler';
 import * as AWS from "aws-sdk";
-
 import { failure, success } from "../libs/response";
 import { findUserId } from "../libs/database";
 
 const SES = new AWS.SES();
 
-export const main = async (event) => {
+export const main = handler(async (event) => {
   const { feedback } = JSON.parse(event.body);
   const userId = findUserId(event);
 

@@ -1,8 +1,8 @@
-
+import { handler } from '../libs/handler';
 import { failure, success } from "../libs/response";
 import { queryItems, findUserId } from "../libs/database";
 
-export const main = async (event) => {
+export const main = handler(async (event) => {
   const userId = findUserId(event);
 
   const params = {

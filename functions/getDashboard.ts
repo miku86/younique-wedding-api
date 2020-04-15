@@ -1,4 +1,4 @@
-
+import { handler } from '../libs/handler';
 import { failure, success } from "../libs/response";
 import { queryItems, findUserId } from "../libs/database";
 
@@ -62,7 +62,7 @@ const fetchBudgetData = async (userId) => {
   }
 };
 
-export const main = async (event) => {
+export const main = handler(async (event) => {
   const userId = findUserId(event);
   const todos = await fetchTodoData(userId);
   const guests = await fetchGuestData(userId);
