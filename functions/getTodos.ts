@@ -8,8 +8,8 @@ export const main = handler(async (event) => {
     TableName: process.env.tableName,
     KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
     ExpressionAttributeValues: {
-      ":pk": `USER#${userId}`,
-      ":sk": `TODO#${userId}`
+      // ":pk": `USER#${userId}`,
+      // ":sk": `TODO#${userId}`
     }
   };
 
