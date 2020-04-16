@@ -8,11 +8,13 @@ export const main = handler(async (event) => {
     TableName: process.env.tableName,
     KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
     ExpressionAttributeValues: {
-      // ":pk": `USER#${userId}`,
-      // ":sk": `TODO#${userId}`
+      ":pk": `USER#${userId}`,
+      ":sk": `TODO#${userId}`
     }
   };
 
   const result = await queryItems(params);
+
+  await new Promise(resolve => setTimeout(resolve, 10000));
   return result.Items;
 });
