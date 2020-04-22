@@ -18,6 +18,24 @@
     "plugins": [
         "@typescript-eslint"
     ],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
+            }
+        }
+    },
     "rules": {
+        "import/prefer-default-export": 0,
+        "import/extensions": 0,
+        "quotes": [
+            2,
+            "double"
+        ]
     }
 }
