@@ -1,64 +1,32 @@
+import { findUserId, queryItems } from "../libs/database";
 import { handler } from '../libs/handler';
-import { queryItems, findUserId } from "../libs/database";
+import { createBudgetParams, createGuestParams, createTodoParams } from "../libs/params";
 
-const fetchTodoData = handler(async (event) => {
+const createDetailsObject = items => {
+  return {
+    amountItems: items.length,
+    amountDoneItems: items.filter(item => item.done).length
+  }
+}
+
+export const main = handler(async (event) => {
   const userId = findUserId(event);
 
-  const params = {
-    TableName: process.env.tableName,
-    KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
-    ExpressionAttributeValues: {
-      ":pk": `USER#${userId}`,
-      ":sk": `TODO#${userId}`
-    }
+  const todoParams = createTodoParams(userId);
+  const todos = await queryItems(todoParams);
+  const todosDetails = createDetailsObject(todos.Items)
+
+  const guestParams = createGuestParams(userId);
+  const guests = await queryItems(guestParams);
+  const guestsDetails = createDetailsObject(guests.Items);
+
+  const budgetParams = createBudgetParams(userId);
+  const budgets = await queryItems(budgetParams);
+  const budgetsDetails = createDetailsObject(budgets.Items)
+
+  return {
+    todos: todosDetails,
+    guests: guestsDetails,
+    budget: budgetsDetails
   };
-
-  const { Items } = await queryItems(params);
-  const amountItems = Items.length;
-  const amountDoneItems = Items.filter(item => item.done).length;
-  return { amountItems, amountDoneItems };
 });
-
-const fetchGuestData = handler(async (event) => {
-  const userId = findUserId(event);
-
-  const params = {
-    TableName: process.env.tableName,
-    KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
-    ExpressionAttributeValues: {
-      ":pk": `USER#${userId}`,
-      ":sk": `GUEST#${userId}`
-    }
-  };
-
-  const { Items } = await queryItems(params);
-  const amountItems = Items.length;
-  const amountDoneItems = Items.filter(item => item.coming).length;
-  return { amountItems, amountDoneItems };
-});
-
-const fetchBudgetData = handler(async (event) => {
-  const userId = findUserId(event);
-
-  const params = {
-    TableName: process.env.tableName,
-    KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
-    ExpressionAttributeValues: {
-      ":pk": `USER#${userId}`,
-      ":sk": `BUDGETITEM#${userId}`
-    }
-  };
-
-  const { Items } = await queryItems(params);
-  const amountItems = Items.length;
-  const amountDoneItems = Items.filter(item => item.done).length;
-  return { amountItems, amountDoneItems };
-});
-
-export const main = async (event, context) => {
-  const todos = await fetchTodoData(event, context);
-  const guests = await fetchGuestData(event, context);
-  const budget = await fetchBudgetData(event, context);
-  let dashboardData = {todos, guests, budget};
-  return dashboardData;
-};
