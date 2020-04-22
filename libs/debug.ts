@@ -1,10 +1,23 @@
 import * as AWS from "aws-sdk";
 import * as util from "util";
 
+
+const logs = [];
+let timeoutTimer;
+
+export function debug(data) {
+  logs.push({
+    date: new Date(),
+    string: util.format(data),
+  });
+}
+
 AWS.config.logger = { log: debug };
 
-let logs = [];
-let timeoutTimer;
+export const flush = (error) => {
+  logs.forEach(({ date, string }) => console.debug(date, string));
+  console.error(error);
+};
 
 export const init = (event, context) => {
   debug({
@@ -22,16 +35,4 @@ export const init = (event, context) => {
 export const end = () => {
   clearTimeout(timeoutTimer);
   timeoutTimer = null;
-};
-
-export const flush = (error) => {
-  logs.forEach(({ date, string }) => console.debug(date, string));
-  console.error(error);
-};
-
-export function debug(data){
-  logs.push({
-    date: new Date(),
-    string: util.format(data),
-  });
 };

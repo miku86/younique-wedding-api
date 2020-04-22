@@ -1,4 +1,4 @@
-import { handler } from '../libs/handler';
+import { handler } from "../libs/handler";
 import { findUserId, queryItems } from "../libs/database";
 
 export const main = handler(async (event) => {
@@ -9,8 +9,8 @@ export const main = handler(async (event) => {
     KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
     ExpressionAttributeValues: {
       ":pk": `USER#${userId}`,
-      ":sk": `#METADATA#${userId}`
-    }
+      ":sk": `#METADATA#${userId}`,
+    },
   };
 
   const result = await queryItems(params);

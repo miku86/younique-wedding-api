@@ -1,5 +1,5 @@
-import { handler } from '../libs/handler';
 import * as AWS from "aws-sdk";
+import { handler } from "../libs/handler";
 import { findUserId } from "../libs/database";
 
 const SES = new AWS.SES();
@@ -19,8 +19,8 @@ export const main = handler(async (event) => {
         },
       },
       Subject: {
-        Charset: 'UTF-8',
-        Data: 'Feedback: neues Feature',
+        Charset: "UTF-8",
+        Data: "Feedback: neues Feature",
       },
     },
     Source: "miku86coding@gmail.com",

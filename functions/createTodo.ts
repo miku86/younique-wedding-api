@@ -1,6 +1,6 @@
-import { handler } from '../libs/handler';
-import { v4 as uuidv4 } from 'uuid';
-import { findUserId, putItem } from '../libs/database';
+import { v4 as uuidv4 } from "uuid";
+import { handler } from "../libs/handler";
+import { findUserId, putItem } from "../libs/database";
 
 export const main = handler(async (event) => {
   const data = JSON.parse(event.body);
@@ -16,8 +16,8 @@ export const main = handler(async (event) => {
       userId,
       timestamp: Date.now(),
       done: false,
-      ...data
-    }
+      ...data,
+    },
   };
 
   await putItem(params);

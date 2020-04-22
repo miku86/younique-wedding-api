@@ -1,20 +1,18 @@
 import { findUserId, queryItems } from "../libs/database";
-import { handler } from '../libs/handler';
+import { handler } from "../libs/handler";
 import { createBudgetParams, createGuestParams, createTodoParams } from "../libs/params";
 
-const createDetailsObject = items => {
-  return {
-    amountItems: items.length,
-    amountDoneItems: items.filter(item => item.done).length
-  }
-}
+const createDetailsObject = (items) => ({
+  amountItems: items.length,
+  amountDoneItems: items.filter((item) => item.done).length,
+});
 
 export const main = handler(async (event) => {
   const userId = findUserId(event);
 
   const todoParams = createTodoParams(userId);
   const todos = await queryItems(todoParams);
-  const todosDetails = createDetailsObject(todos.Items)
+  const todosDetails = createDetailsObject(todos.Items);
 
   const guestParams = createGuestParams(userId);
   const guests = await queryItems(guestParams);
@@ -22,11 +20,11 @@ export const main = handler(async (event) => {
 
   const budgetParams = createBudgetParams(userId);
   const budgets = await queryItems(budgetParams);
-  const budgetsDetails = createDetailsObject(budgets.Items)
+  const budgetsDetails = createDetailsObject(budgets.Items);
 
   return {
     todos: todosDetails,
     guests: guestsDetails,
-    budget: budgetsDetails
+    budget: budgetsDetails,
   };
 });

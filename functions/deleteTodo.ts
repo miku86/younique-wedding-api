@@ -1,4 +1,4 @@
-import { handler } from '../libs/handler';
+import { handler } from "../libs/handler";
 import { deleteItem, findUserId } from "../libs/database";
 
 export const main = handler(async (event) => {
@@ -10,7 +10,7 @@ export const main = handler(async (event) => {
     Key: {
       PK: `USER#${userId}`,
       SK: `TODO#${userId}#${todoId}`,
-    }
+    },
   };
 
   await deleteItem(params);

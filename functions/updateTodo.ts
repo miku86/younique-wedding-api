@@ -1,5 +1,7 @@
-import { handler } from '../libs/handler';
-import { findUserId, createExpression, createNames, createValues, updateItem } from "../libs/database";
+import { handler } from "../libs/handler";
+import {
+  findUserId, createExpression, createNames, createValues, updateItem,
+} from "../libs/database";
 
 export const main = handler(async (event) => {
   const { todoId, data } = JSON.parse(event.body);
@@ -18,7 +20,7 @@ export const main = handler(async (event) => {
     UpdateExpression,
     ExpressionAttributeNames,
     ExpressionAttributeValues,
-    ReturnValues: "ALL_NEW"
+    ReturnValues: "ALL_NEW",
   };
 
   await updateItem(params);

@@ -10,14 +10,14 @@ export const deleteItem = (params) => database.delete(params).promise();
 
 export const findUserId = (event) => {
   const authProvider = event.requestContext.identity.cognitoAuthenticationProvider;
-  const parts = authProvider.split(':');
+  const parts = authProvider.split(":");
   const userPoolUserId = parts[parts.length - 1];
   return userPoolUserId;
 };
 
 export const createNames = (data) => {
   const names = {};
-  Object.keys(data).forEach(key => {
+  Object.keys(data).forEach((key) => {
     names[`#${key}`] = key;
   });
   return names;
@@ -25,7 +25,7 @@ export const createNames = (data) => {
 
 export const createValues = (data) => {
   const values = {};
-  Object.keys(data).forEach(key => {
+  Object.keys(data).forEach((key) => {
     if (typeof data[key] === "boolean") {
       values[`:${key}`] = data[key];
     } else if (data[key] === "" || data[key] === null) {
@@ -40,7 +40,7 @@ export const createValues = (data) => {
 export const createExpression = (data) => {
   const expression = Object
     .keys(data)
-    .map(key => `#${[key]} = :${key}`)
+    .map((key) => `#${[key]} = :${key}`)
     .join(", ");
   return `SET ${expression}`;
 };
