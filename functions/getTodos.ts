@@ -1,18 +1,10 @@
+import { findUserId, queryItems } from "../libs/database";
 import { handler } from '../libs/handler';
-import { queryItems, findUserId } from "../libs/database";
+import { createTodoParams } from '../libs/params';
 
 export const main = handler(async (event) => {
   const userId = findUserId(event);
-
-  const params = {
-    TableName: process.env.tableName,
-    KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
-    ExpressionAttributeValues: {
-      ":pk": `USER#${userId}`,
-      ":sk": `TODO#${userId}`
-    }
-  };
-
+  const params = createTodoParams(userId);
   const result = await queryItems(params);
   return result.Items;
 });
