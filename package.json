@@ -22,7 +22,7 @@
     "serverless-dotenv-plugin": "2.4.2",
     "serverless-webpack": "5.3.1",
     "ts-loader": "7.0.1",
-    "typescript": "3.8.3",
+    "typescript": "3.9.7",
     "webpack": "4.43.0",
     "webpack-node-externals": "1.7.2"
   },
